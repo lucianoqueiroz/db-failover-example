@@ -1,0 +1,4 @@
+zone "postgres.com" {
+    type master;
+    file "/etc/bind/zones/db.postgres.com";
+};

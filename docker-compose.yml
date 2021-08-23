@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  dns-server:
+    build:
+      context: ./dns-server/
+    networks:
+      default:
+        ipv4_address: 172.20.0.2
+  db-master:
+    image: postgres
+    networks:
+      default:
+        ipv4_address: 172.20.0.3 
+    dns:
+      - 172.20.0.2
+    environment:
+      - "POSTGRES_HOST_AUTH_METHOD=trust"
+  db-replica:
+    image: postgres 
+    networks:
+      default:
+        ipv4_address: 172.20.0.4
+    dns:
+      - 172.20.0.2
+    environment:
+      - "POSTGRES_HOST_AUTH_METHOD=trust"
+networks:
+  default:
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.20.0.0/16"
+

@@ -11,5 +11,5 @@ RUN apt-get update \
 RUN sed -i 's/OPTIONS=.*/OPTIONS="-4 -u bind"/' /etc/default/bind9
 
 # Run eternal loop
-CMD ["/bin/bash", "-c", "while :; do sleep 10; done"]
+CMD ["/bin/bash", "-c", "./etc/init.d/bind9 start && while :; do sleep 10; done"]
 

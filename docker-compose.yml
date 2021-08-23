@@ -7,13 +7,15 @@ services:
     networks:
       default:
         ipv4_address: 172.20.0.2
+    volumes:
+      - ./dns-server/etc/bind/named.conf.local:/etc/bind/named.conf.local
+      - ./dns-server/etc/bind/named.conf.options:/etc/bind/named.conf.options
+      - ./dns-server/etc/bind/zones/db.postgres.com:/etc/bind/zones/db.postgres.com
   db-master:
     image: postgres
     networks:
       default:
         ipv4_address: 172.20.0.3 
-    dns:
-      - 172.20.0.2
     environment:
       - "POSTGRES_HOST_AUTH_METHOD=trust"
   db-replica:
@@ -21,8 +23,6 @@ services:
     networks:
       default:
         ipv4_address: 172.20.0.4
-    dns:
-      - 172.20.0.2
     environment:
       - "POSTGRES_HOST_AUTH_METHOD=trust"
 networks:

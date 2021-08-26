@@ -10,7 +10,7 @@ services:
     volumes:
       - ./dns-server/etc/bind/named.conf.local:/etc/bind/named.conf.local
       - ./dns-server/etc/bind/named.conf.options:/etc/bind/named.conf.options
-      - ./dns-server/etc/bind/zones/db.postgres.com:/etc/bind/zones/db.postgres.com
+      - ./dns-server/var/lib/bind/zones/db.postgres.com:/var/lib/bind/zones/db.postgres.com
   db-master:
     image: postgres
     networks:

@@ -1,4 +1,8 @@
-zone "postgres.com" {
+zone "postgres.com." {
     type master;
-    file "/etc/bind/zones/db.postgres.com";
+    file "/var/lib/bind/zones/db.postgres.com";
+    
+    allow-query { any; };
+    allow-update { key rndc-key; };
 };
+

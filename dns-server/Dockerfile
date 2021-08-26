@@ -5,11 +5,14 @@ RUN apt-get update \
   bind9 \
   bind9utils \
   bind9-doc \
-  rsyslog
+  dnsutils 
 
 # Enable IPv4
 RUN sed -i 's/OPTIONS=.*/OPTIONS="-4 -u bind"/' /etc/default/bind9
 
-# Run eternal loop
-CMD ["/bin/bash", "-c", "./etc/init.d/bind9 start && while :; do sleep 10; done"]
+# Copy and paste existing key
+RUN cp /etc/bind/rndc.key /etc/bind/ns-postgres-com_rndc-key
+
+# Run named 
+CMD ["named", "-4", "-g"]
 

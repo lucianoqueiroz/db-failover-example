@@ -14,5 +14,5 @@
 ### TBD
 
 - [x] Failover script
-- [ ] Query open db connections on `master.postgres.com`
+- [x] Query open db connections on `master.postgres.com`
 

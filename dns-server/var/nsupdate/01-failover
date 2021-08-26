@@ -1,0 +1,5 @@
+update delete master.postgres.com A
+update add master.postgres.com 86400 A 172.20.0.4
+show
+send
+quit

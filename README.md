@@ -13,6 +13,6 @@
 
 ### TBD
 
-- [ ] Failover script
+- [x] Failover script
 - [ ] Query open db connections on `master.postgres.com`
 

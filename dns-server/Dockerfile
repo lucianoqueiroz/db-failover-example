@@ -13,6 +13,10 @@ RUN sed -i 's/OPTIONS=.*/OPTIONS="-4 -u bind"/' /etc/default/bind9
 # Copy and paste existing key
 RUN cp /etc/bind/rndc.key /etc/bind/ns-postgres-com_rndc-key
 
+# Permissions for bind user
+RUN chown root:bind /etc/bind/rndc.key
+RUN chmod 600 /etc/bind/rndc.key
+
 # Run named 
 CMD ["named", "-4", "-g"]
 

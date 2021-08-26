@@ -8,9 +8,11 @@ services:
       default:
         ipv4_address: 172.20.0.2
     volumes:
+      - ./dns-server/etc/bind/named.conf:/etc/bind/named.conf
       - ./dns-server/etc/bind/named.conf.local:/etc/bind/named.conf.local
       - ./dns-server/etc/bind/named.conf.options:/etc/bind/named.conf.options
       - ./dns-server/var/lib/bind/zones/db.postgres.com:/var/lib/bind/zones/db.postgres.com
+      - ./dns-server/var/nsupdate/01-failover:/var/nsupdate/01-failover
   db-master:
     image: postgres
     networks:

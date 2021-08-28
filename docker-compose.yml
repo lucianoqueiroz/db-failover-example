@@ -14,7 +14,8 @@ services:
       - ./dns-server/var/lib/bind/zones/db.postgres.com:/var/lib/bind/zones/db.postgres.com
       - ./dns-server/var/nsupdate/01-failover:/var/nsupdate/01-failover
   db-master:
-    image: postgres
+    build:
+      context: ./postgres
     networks:
       default:
         ipv4_address: 172.20.0.3 
@@ -24,7 +25,8 @@ services:
       - ./postgres/data/worldcities.csv:/var/data/worldcities.csv
       - ./postgres/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
   db-replica:
-    image: postgres 
+    build:
+      context: ./postgres
     networks:
       default:
         ipv4_address: 172.20.0.4
@@ -33,7 +35,7 @@ services:
     volumes:
       - ./postgres/data/worldcities.csv:/var/data/worldcities.csv
       - ./postgres/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
-  application-a:
+  application:
     build:
       context: ./application
     networks:
@@ -46,20 +48,6 @@ services:
     environment:
       - "DB_HOST=master.postgres.com"
       - "DB_PORT=5432"
-  application-b:
-    build:
-      context: ./application
-    networks:
-      default:
-        ipv4_address: 172.20.0.101
-    ports:
-      - "8081:8080"
-    dns:
-      - 172.20.0.2
-    environment:
-      - "DB_HOST=replica.postgres.com"
-      - "DB_PORT=5432"
-
 networks:
   default:
     ipam:

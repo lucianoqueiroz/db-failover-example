@@ -15,4 +15,4 @@
 
 - [x] Failover script
 - [x] Query open db connections on `master.postgres.com`
-
+- [ ] Create script for messing with database network conditions

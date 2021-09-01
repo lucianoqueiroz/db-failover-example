@@ -46,8 +46,7 @@ services:
     dns:
       - 172.20.0.2
     environment:
-      - "DB_HOST=master.postgres.com"
-      - "DB_PORT=5432"
+      - "DB_CONNECTION_URL=jdbc:postgresql://master.postgres.com:5432/postgres"
 networks:
   default:
     ipam:

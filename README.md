@@ -21,3 +21,4 @@
 - [ ] Improve scripts to take arguments thus making them more flexible.
 - [ ] Create script to teardown whole stack.
 - [ ] Tune HikariCP configuration for rapid recovering after db failover.
+- [ ] Add RoR application to stack and check how ActiveRecord connection pool behaves after DB failover.
